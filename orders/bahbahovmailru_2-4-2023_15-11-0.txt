@@ -1,0 +1,5 @@
+email:bah.bahov@mail.ru
+color:orange
+bodykit:stock
+rims:ro_ja
+45500

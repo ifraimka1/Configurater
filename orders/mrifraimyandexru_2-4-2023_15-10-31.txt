@@ -1,0 +1,5 @@
+email:mr.ifraim@yandex.ru
+color:white
+bodykit:stock
+rims:stock
+40500

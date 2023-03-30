@@ -1,0 +1,3 @@
+color,black,0,white,500,orange,1000
+bodykit,stock,0,medium,5000,wide,7500
+rims,stock,0,bbs,1000,ro_ja,4500

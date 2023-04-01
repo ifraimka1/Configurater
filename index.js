@@ -1,9 +1,8 @@
-const mf = require('./myFunctions');
-const fs = require('fs');
-const express = require('express');
-const { Liquid } = require('liquidjs');
-const bodyParser = require('body-parser');
-const { getStringForFile } = require('./myFunctions');
+import { defaultPrice, readOptions, getImageName, calculateCost, getStringForFile } from './myFunctions.js';
+import { writeFile } from 'fs';
+import express from 'express';
+import { Liquid } from 'liquidjs';
+import bodyParser from 'body-parser';
 const app = express();
 const port = 3000;
 
@@ -11,24 +10,23 @@ const port = 3000;
 app.use(express.static('./'));
 
 const engine = new Liquid(); // register liquid engine
-app.engine('liquid', engine.express());
-app.set('views', './views');            // specify the views directory
+app.engine('liquid', engine.express()); 
+app.set('views', './views'); // specify the views directory
 app.set('view engine', 'liquid');
 
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-const defaultOptions = mf.readOptions();
+const defaultOptions = readOptions();
 const options = defaultOptions;
-
-console.log(options);
+console.log('Вот тут у нас',options);
 
 app.get('/', (req, res) => {
     res.render('home', {
-        cost: mf.defaultPrice,
+        cost: defaultPrice,
         options: defaultOptions,
-        imageName: mf.getImageName(defaultOptions),
+        imageName: getImageName(defaultOptions),
     });
 
     console.log(new Date());
@@ -47,9 +45,9 @@ app.post('/', (req, res) => {
     }
 
     const set = {
-        cost: mf.calculateCost(options),
+        cost: calculateCost(options),
         options,
-        imageName: mf.getImageName(options)
+        imageName: getImageName(options)
     };
 
     if (req.body.save) {
@@ -59,7 +57,7 @@ app.post('/', (req, res) => {
         const fileName = `${cleanEmail}_${strDate}.txt`;
 
         const data = getStringForFile(options, req.body.email);
-        fs.writeFile('C:/Projects/back/Task 2/orders/'+fileName, data, (err) => {
+        writeFile('C:/Projects/back/Task 2/orders/'+fileName, data, (err) => {
             if (err) {
                 console.error(err);
                 set.alert = 'Ошибка при оформлении заказа, попробуйте позже';

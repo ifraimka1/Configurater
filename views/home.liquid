@@ -1,57 +1,64 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
+
+<head>
     <meta charset="UTF-8">
     <link href="/public/style.css" rel="stylesheet">
-  </head>
+</head>
 
-    <div id="image">
-      <h1 id="cost">Цена: {{ cost }}</h1>
-      <img src="/pix/{{ imageName }}.jpg">
+<!-- Блок изображения автомобиля с ценой -->
+<div id="image">
+    <h1 id="cost">Цена: {{ cost }}</h1>
+    <img src="/pix/{{ imageName }}.jpg">
+</div>
+
+<!-- Форма оформления заказа. Содержит выбор доступных опций и ввод email -->
+<form method="post" id="options" input:onClick="update()">
+
+    <!-- В цикле выводим имеющиеся опции -->
+    {% for option in options %}
+    <div id="{{option.name}}" class="options-block">
+        <h1>{{option.name}}</h1>
+        <div class="row">
+            {% for el in option.var %}
+            <label class="button">
+                <input class="upd" type="radio" name="{{ option.name }}" value="{{ forloop.index0 }}" {% if
+                    option.selectedVar==forloop.index0 %}checked{% endif %}>
+                <img src="/pix/{{ option.name }}/{{ el }}.png">
+            </label>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+
+    <!-- Блок подтверждения заказа, где содержится ввод email'а и кнопка подтверждения -->
+    <div id="submit">
+        <h2>Введите ваш e-mail, чтобы оформить заказ</h2>
+        <input type="email" id="email" name="email" required {% if email %}value="{{ email }}" {% endif %}>
+        <input type="submit" id="save" name="save" value="Заказать">
     </div>
 
-    <form
-      method="post"
-      id="options"
-      input:onClick="update()">
+    <img id="frog" src="/pix/Zhabka.gif">
+</form>
+</body>
 
-        {% for option in options %}
-            <div id="{{option.name}}" class="options-block">
-                <h1>{{option.name}}</h1>
-                <div class="row">
-                    {% for el in option.var %}
-                        <label class="button">
-                            <input class="upd" type="radio" name="{{ option.name }}" value="{{ forloop.index0 }}" {% if option.selectedVar == forloop.index0 %}checked{% endif %}>
-                            <img src="/pix/{{ option.name }}/{{ el }}.png">
-                        </label>
-                    {% endfor %}
-                </div>
-            </div>
-        {% endfor %}
-
-      <div id="submit">
-        <h2>Введите ваш e-mail, чтобы оформить заказ</h2>
-        <input type="email" id="email" name="email" required {% if email %}value="{{ email }}"{% endif %}>
-        <input type="submit" id="save" name="save" value="Заказать">
-      </div>
-
-      <img id="frog" src="/pix/Zhabka.gif">
-    </form>
-  </body>
-
-  <script>
+<script>
+    // При наличии уведомления выводит его на экран
     {% if alert %}
     alert("{{alert}}");
     {% endif %}
 
+    // На все элементы класса "upd" устанавливает обработчики события "click", при котором вызывается функция "update"
     const array = document.getElementsByClassName("upd");
     for (el of array) {
-      el.addEventListener("click", update);
+        el.addEventListener("click", update);
     }
 
-    async function update() {
-      console.log('Update!!');
-      document.getElementById("options").submit();
+    // Отправляет форму, тем самым обновляя страницу вместе с картинкой и стоимостью
+    function update() {
+        console.log('Update!!');
+        document.getElementById("options").submit();
     }
-  </script>
+</script>
+
 </html>

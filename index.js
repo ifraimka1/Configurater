@@ -6,7 +6,6 @@ import bodyParser from 'body-parser';
 const app = express();
 const port = 3000;
 
-
 app.use(express.static('./'));
 
 const engine = new Liquid(); // register liquid engine
@@ -56,7 +55,7 @@ app.post('/', (req, res) => {
         const fileName = `${cleanEmail}_${strDate}.txt`;
 
         const data = getStringForFile(options, req.body.email);
-        writeFile('C:/Projects/back/Task 2/orders/'+fileName, data, (err) => {
+        writeFile('C:/Projects/back/Task 2/orders/' + fileName, data, (err) => {
             if (err) {
                 console.error(err);
                 set.alert = 'Ошибка при оформлении заказа, попробуйте позже';

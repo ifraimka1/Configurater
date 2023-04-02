@@ -28,7 +28,7 @@ h1 {
 
 #image {
     width: 100%;
-    height: calc(40vh - 16px);
+    height: calc(60vh - 16px);
     margin-bottom: 8px;
 }
 
@@ -40,13 +40,13 @@ h1 {
 
 #image #cost {
     position: fixed;
-    right: 10%;
-    bottom: calc(60vh - 16px);
+    right: 15%;
+    bottom: calc(40vh - 16px);
 }
 
 #options {
     width: 60%;
-    height: calc(60vh - 8px);
+    height: calc(40vh - 8px);
     overflow-y: scroll;
     background-color: rgba(50, 50, 50, 50%);
     border-radius: 10px;

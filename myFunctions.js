@@ -11,6 +11,16 @@ import { readFileSync } from 'fs';
  */
 const defaultPrice = 40000;
 
+
+/**
+ * Возвращает стоимость по умолчанию (defaultPrice)
+ *
+ * @returns {Number}
+ */
+function getDefaultPrice() {
+    return defaultPrice;
+}
+
 /**
  * Рассчитывает конечную стоимость с учетом выбранных опций.
  *
@@ -120,23 +130,4 @@ function getStringForFile(options, email) {
     return result;
 }
 
-export {defaultPrice, calculateCost, readOptions, getImageName, getStringForFile}
-
-
-// const options = {
-//     color: {
-//         black: 0,
-//         white: 500,
-//         orange: 1000
-//     },
-//     bodykit: {
-//         stock: 0,
-//         medium: 5000,
-//         wide: 7500
-//     },
-//     rims: {
-//         stock: 0,
-//         bbs: 1000,
-//         ro_ja: 4500
-//     }
-// }
+export {getDefaultPrice, calculateCost, readOptions, getImageName, getStringForFile}

@@ -1,4 +1,4 @@
-import { defaultPrice, readOptions, getImageName, calculateCost, getStringForFile } from './myFunctions.js';
+import { getDefaultPrice, readOptions, getImageName, calculateCost, getStringForFile } from './myFunctions.js';
 import { writeFile } from 'fs';
 import express from 'express';
 import { Liquid } from 'liquidjs';
@@ -22,7 +22,7 @@ const options = defaultOptions;
 
 app.get('/', (req, res) => {
     res.render('home', {
-        cost: defaultPrice,
+        cost: getDefaultPrice(),
         options: defaultOptions,
         imageName: getImageName(defaultOptions),
     });
@@ -49,8 +49,8 @@ app.post('/', (req, res) => {
         const strDate = `${curDate.getMonth()}-${curDate.getDay()}-${curDate.getFullYear()}_${curDate.getHours()}-${curDate.getMinutes()}-${curDate.getSeconds()}`;
         const cleanEmail = (req.body.email).replace(/[^a-z0-9]/gi, "");
         const fileName = `${cleanEmail}_${strDate}.txt`;
-
         const data = getStringForFile(options, req.body.email);
+
         writeFile('C:/Projects/back/Task 2/orders/' + fileName, data, (err) => {
             if (err) {
                 console.error(err);
@@ -64,7 +64,6 @@ app.post('/', (req, res) => {
     } else {
         res.render('home', set);
     }
-
 });
 
 app.listen(port, () => {

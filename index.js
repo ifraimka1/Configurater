@@ -10,7 +10,7 @@ const port = 3000;
 app.use(express.static('./'));
 
 const engine = new Liquid(); // register liquid engine
-app.engine('liquid', engine.express()); 
+app.engine('liquid', engine.express());
 app.set('views', './views'); // specify the views directory
 app.set('view engine', 'liquid');
 
@@ -20,7 +20,6 @@ app.use(bodyParser.urlencoded({
 
 const defaultOptions = readOptions();
 const options = defaultOptions;
-console.log('Вот тут у нас',options);
 
 app.get('/', (req, res) => {
     res.render('home', {

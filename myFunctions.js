@@ -1,4 +1,5 @@
 /**
+ * Это модуль. Его имя module:myFunctions
  * Содержит основную логику веб-приложения
  *
  * @module myFunctions

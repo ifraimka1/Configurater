@@ -26,8 +26,6 @@ app.get('/', (req, res) => {
         options: defaultOptions,
         imageName: getImageName(defaultOptions),
     });
-
-    console.log(new Date());
 });
 
 app.post('/', (req, res) => {
@@ -35,9 +33,7 @@ app.post('/', (req, res) => {
     for (let i in req.body) {
         for (let option of options) {
             if (option.name == i) {
-                console.log(option.name, '==', i);
                 option.selectedVar = parseInt(req.body[i]);
-                console.log(req.body[i], option);
             }
         }
     }
